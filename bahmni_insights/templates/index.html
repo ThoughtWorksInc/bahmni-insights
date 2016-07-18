@@ -3,8 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <title>Disease demographics</title>
+    <script type="application/javascript">
+        function toFlareJson(diseases){
+            var results = _.keys(diseases).map(function(diseaseName){
+                var children = [];
+                _.keys(diseases[diseaseName]).forEach(function(villageName){
+                    children.push({name:villageName, size: diseases[diseaseName][villageName]})
+                });
+
+                return {
+                    name:diseaseName,
+                    children: children
+                }
+            });
+
+            return {
+                name:"bahmni",
+                children:results
+            }
+        };
+    </script>
+    <script type="text/css">
+        path {
+            stroke: #000;
+        }
+    </script>
 </head>
 <body>
 <h2>Welcome to bahmni insights</h2>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.13.1/lodash.min.js"></script>
+<script src="https://code.jquery.com/jquery-2.2.1.min.js"
+        integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="
+        crossorigin="anonymous"></script>
+<!--<script src="/static/circle-pack.js"></script>-->
+<script src="/static/sunburst.js"></script>
 </body>
 </html>
